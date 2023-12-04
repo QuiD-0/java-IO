@@ -2,6 +2,7 @@ package com.quid.io.file.write
 
 import java.io.File
 import java.nio.file.Files
+import java.nio.file.Paths
 
 class WriteFile(
     private val path: String = System.getProperty("user.home"),
@@ -17,7 +18,7 @@ class WriteFile(
     fun nio() {
         val text = "Hello World!"
 
-        Files.write(java.nio.file.Paths.get("$path/Downloads/$fileName"), text.toByteArray())
+        Files.write(Paths.get("$path/Downloads/$fileName"), text.toByteArray())
     }
 }
 
