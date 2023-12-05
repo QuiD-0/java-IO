@@ -14,7 +14,3 @@ class WriteImg(
         }
 
 }
-
-fun main(){
-    WriteImg(fileName = "text_img.jpg").img()
-}
