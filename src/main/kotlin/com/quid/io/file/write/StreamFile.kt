@@ -2,6 +2,7 @@ package com.quid.io.file.write
 
 import java.io.File
 import java.io.FileInputStream
+import java.io.FileOutputStream
 
 interface StreamFile {
     fun input()
@@ -11,11 +12,13 @@ interface StreamFile {
         private val fileName: String = "write.jpg"
     ) : StreamFile {
         override fun input() {
-            val inputStream = FileInputStream("src/main/resources/asset/img.jpg")
-            val image = inputStream.readBytes()
+            val image = FileInputStream("src/main/resources/asset/img.jpg")
+                .use { it.readBytes() }
 
             val file = File("$path/Downloads/$fileName")
-            file.writeBytes(image)
+
+            FileOutputStream(file)
+                .use { it.write(image) }
         }
     }
 }
