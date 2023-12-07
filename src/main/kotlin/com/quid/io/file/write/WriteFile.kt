@@ -21,8 +21,3 @@ class WriteFile(
         Files.write(Paths.get("$path/Downloads/$fileName"), text.toByteArray())
     }
 }
-
-fun main(){
-    WriteFile(fileName = "io.txt").txt()
-    WriteFile(fileName = "nio.txt").nio()
-}
