@@ -17,7 +17,7 @@ class MultipartApiController(
         println(file.absolutePath)
         multipartFile.transferTo(file)
 
-        uploadFile(file)
+        uploadFile(file, multipartFile.originalFilename?:"temp")
         file.delete()
     }
 }

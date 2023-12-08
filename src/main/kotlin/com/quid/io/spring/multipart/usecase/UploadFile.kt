@@ -4,17 +4,16 @@ import org.springframework.stereotype.Service
 import java.io.File
 
 fun interface UploadFile {
-    operator fun invoke(file: File)
+    operator fun invoke(file: File, fileName: String)
 
     @Service
     class IOUploadFile : UploadFile {
-        override fun invoke(file: File) {
+        override fun invoke(file: File, fileName: String) {
             val path = System.getProperty("user.home")
-            val fileName = file.name
-            val image = file.readBytes()
-
             val uploadFile = File("$path/Downloads/$fileName")
-            uploadFile.writeBytes(image)
+
+            val byte: ByteArray = file.readBytes()
+            uploadFile.writeBytes(byte)
         }
     }
 }
