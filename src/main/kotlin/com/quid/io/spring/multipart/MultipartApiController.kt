@@ -13,9 +13,11 @@ class MultipartApiController(
 ){
     @PostMapping("/api/multipart")
     fun upload(@RequestPart multipartFile: MultipartFile) {
-        val file = File(multipartFile.originalFilename!!)
+        val file = File.createTempFile("temp", multipartFile.originalFilename)
+        println(file.absolutePath)
         multipartFile.transferTo(file)
 
         uploadFile(file)
+        file.delete()
     }
 }
