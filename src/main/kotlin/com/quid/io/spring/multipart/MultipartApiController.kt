@@ -1,6 +1,7 @@
 package com.quid.io.spring.multipart
 
 import com.quid.io.spring.multipart.usecase.UploadFile
+import org.slf4j.LoggerFactory
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestPart
 import org.springframework.web.bind.annotation.RestController
@@ -11,13 +12,17 @@ import java.io.File
 class MultipartApiController(
     private val uploadFile: UploadFile
 ){
+    private val logger = LoggerFactory.getLogger(MultipartApiController::class.java)
+    
     @PostMapping("/api/multipart")
     fun upload(@RequestPart multipartFile: MultipartFile) {
-        val file = File.createTempFile("temp", multipartFile.originalFilename)
-        println(file.absolutePath)
-        multipartFile.transferTo(file)
+        logger.info("upload file: ${multipartFile.originalFilename}")
 
-        uploadFile(file, multipartFile.originalFilename?:"temp")
-        file.delete()
+        File.createTempFile("temp", multipartFile.originalFilename).let {
+            multipartFile.transferTo(it)
+            uploadFile(it, multipartFile.originalFilename?:"temp")
+            it.delete()
+        }
+
     }
 }

@@ -12,8 +12,9 @@ fun interface UploadFile {
             val path = System.getProperty("user.home")
             val uploadFile = File("$path/Downloads/$fileName")
 
-            val byte: ByteArray = file.readBytes()
-            uploadFile.writeBytes(byte)
+            file.readBytes().let {
+                uploadFile.writeBytes(it)
+            }
         }
     }
 }
