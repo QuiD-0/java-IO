@@ -7,7 +7,7 @@ import java.nio.file.StandardOpenOption
 
 class Channel {
 
-    fun fileChannel(path: String) {
+    fun writeChannel(path: String) {
         val fileChannel = FileChannel.open(Path.of(path), StandardOpenOption.READ, StandardOpenOption.WRITE)
 
         fileChannel.use {
