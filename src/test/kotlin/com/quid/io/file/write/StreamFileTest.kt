@@ -1,6 +1,6 @@
 package com.quid.io.file.write
 
-import com.quid.io.file.write.StreamFile.IOStreamFile
+import com.quid.io.file.StreamFile.IOStreamFile
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Test
 import java.io.File

@@ -1,6 +1,6 @@
 package com.quid.io.file.write
 
-import com.quid.io.file.write.UpdateFile.IOUpdate
+import com.quid.io.file.UpdateFile.IOUpdate
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach

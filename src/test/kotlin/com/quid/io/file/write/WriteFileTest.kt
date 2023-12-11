@@ -1,5 +1,6 @@
 package com.quid.io.file.write
 
+import com.quid.io.file.WriteFile
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Test
 

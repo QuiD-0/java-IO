@@ -1,4 +1,4 @@
-package com.quid.io.file.write
+package com.quid.io.file
 
 import java.io.BufferedInputStream
 import java.io.BufferedOutputStream
