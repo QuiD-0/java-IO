@@ -11,18 +11,18 @@ import java.io.File
 @RestController
 class MultipartApiController(
     private val uploadFile: UploadFile
-){
+) {
     private val logger = LoggerFactory.getLogger(MultipartApiController::class.java)
-    
+
     @PostMapping("/api/multipart")
     fun upload(@RequestPart multipartFile: MultipartFile) {
-        logger.info("upload file: ${multipartFile.originalFilename}")
+        val name: String = multipartFile.originalFilename ?: "file"
+        logger.info("upload file: $name")
 
-        File.createTempFile("temp", multipartFile.originalFilename).let {
+        File.createTempFile("temp", name).let {
             multipartFile.transferTo(it)
-            uploadFile(it, multipartFile.originalFilename?:"temp")
+            uploadFile(it, name)
             it.delete()
         }
-
     }
 }
