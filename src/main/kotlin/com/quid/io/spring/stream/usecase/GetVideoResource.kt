@@ -30,7 +30,7 @@ fun interface GetVideoResource {
             } ?: Pair(0, min(CHUNK_SIZE, videoResource.contentLength()))
 
         companion object{
-            const val CHUNK_SIZE: Long = 1000000L
+            const val CHUNK_SIZE: Long = 10 * 1024 * 1024
         }
     }
 }
