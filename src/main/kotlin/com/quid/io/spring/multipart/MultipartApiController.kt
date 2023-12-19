@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.multipart.MultipartFile
 import java.io.File
 
+
 @RestController
 class MultipartApiController(
     private val uploadFile: UploadFile
