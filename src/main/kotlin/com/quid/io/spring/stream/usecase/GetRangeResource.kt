@@ -16,18 +16,11 @@ fun interface GetRangeResource {
         override fun invoke(id: String, range: HttpRange?): ResourceRegion =
             videoPathRepository.byId(id)
                 .run { FileSystemResource(this) }
-                .let { videoResource ->
-                    val (start, end) = getRange(videoResource, range)
-                    ResourceRegion(videoResource, start, end)
-                }
+                .let { ResourceRegion(it,  getRange(it, range), CHUNK_SIZE) }
 
 
-        private fun getRange(videoResource: FileSystemResource, range: HttpRange?): Pair<Long, Long> =
-            range?.let {
-                val start: Long = it.getRangeStart(videoResource.contentLength())
-                val end: Long = it.getRangeEnd(videoResource.contentLength())
-                Pair(start, min(start + CHUNK_SIZE, end))
-            } ?: Pair(0, min(CHUNK_SIZE, videoResource.contentLength()))
+        private fun getRange(videoResource: FileSystemResource, range: HttpRange?): Long =
+            range?.getRangeStart(videoResource.contentLength()) ?: 0
 
         companion object{
             const val CHUNK_SIZE: Long = 10 * 1024 * 1024

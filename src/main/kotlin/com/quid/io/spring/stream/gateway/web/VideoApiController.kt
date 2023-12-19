@@ -2,7 +2,6 @@ package com.quid.io.spring.stream.gateway.web
 
 import com.quid.io.spring.stream.usecase.GetFluxResource
 import com.quid.io.spring.stream.usecase.GetRangeResource
-import org.springframework.core.io.Resource
 import org.springframework.core.io.support.ResourceRegion
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
@@ -21,7 +20,6 @@ class VideoApiController(
     @GetMapping("{id}", produces = [MediaType.APPLICATION_OCTET_STREAM_VALUE])
     fun getVideo(@RequestHeader headers: HttpHeaders, @PathVariable id: String): ResourceRegion =
         rangeResource(id, headers.range.firstOrNull())
-
 
     @GetMapping("/flux/{id}", produces = [MediaType.APPLICATION_OCTET_STREAM_VALUE])
     fun getVideos(@RequestHeader headers: HttpHeaders, @PathVariable id: String): Mono<ResourceRegion> =
