@@ -23,7 +23,7 @@ fun interface GetRangeResource {
             range?.getRangeStart(videoResource.contentLength()) ?: 0
 
         companion object{
-            const val CHUNK_SIZE: Long = 10 * 1024 * 1024
+            const val CHUNK_SIZE: Long = 1024 * 1024
         }
     }
 }

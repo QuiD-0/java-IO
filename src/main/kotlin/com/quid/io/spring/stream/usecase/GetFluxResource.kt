@@ -22,21 +22,14 @@ fun interface GetFluxResource {
         override fun invoke(id: String, range: HttpRange?): Mono<ResourceRegion> =
             videoPathRepository.byId(id)
                 .run { resourceLoader.getResource("file:$this") }
-                .let { videoResource ->
-                    val (start, end) = getRange(videoResource, range)
-                    ResourceRegion(videoResource, start, end)
-                }
+                .let { ResourceRegion(it,  getRange(it, range), CHUNK_SIZE)}
                 .let { Mono.fromSupplier { it } }
 
-        private fun getRange(videoResource: Resource, range: HttpRange?): Pair<Long, Long> =
-            range?.let {
-                val start: Long = it.getRangeStart(videoResource.contentLength())
-                val end: Long = it.getRangeEnd(videoResource.contentLength())
-                Pair(start, min(start + CHUNK_SIZE, end))
-            } ?: Pair(0, min(CHUNK_SIZE, videoResource.contentLength()))
+        private fun getRange(resource: Resource, range: HttpRange?): Long =
+            range?.getRangeStart(resource.contentLength()) ?: 0
 
         companion object {
-            const val CHUNK_SIZE: Long = 10 * 1024 * 1024
+            const val CHUNK_SIZE: Long = 1024 * 1024
         }
     }
 }
