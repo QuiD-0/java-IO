@@ -1,6 +1,6 @@
 package com.quid.io.spring.stream.gateway.web
 
-import org.springframework.core.io.FileSystemResource
+import org.springframework.core.io.ClassPathResource
 import org.springframework.core.io.Resource
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -15,8 +15,8 @@ class LiveApiController {
     @GetMapping("/{user}")
     fun getLive(@PathVariable user: String): Resource =
         if (user.contains("ts")) {
-            FileSystemResource("src/main/resources/asset/hls/$user")
+            ClassPathResource("asset/hls/$user")
         } else {
-            FileSystemResource("src/main/resources/asset/hls/$user.m3u8")
+            ClassPathResource("asset/hls/$user.m3u8")
         }
 }
