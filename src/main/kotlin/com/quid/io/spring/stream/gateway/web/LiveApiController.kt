@@ -15,9 +15,8 @@ class LiveApiController {
     @GetMapping("/{user}")
     fun getLive(@PathVariable user: String): Resource =
         if (user.contains("ts")) {
-            val dir = user.split("@")[0]
-            FileSystemResource("src/main/resources/asset/hls/$dir/$user")
+            FileSystemResource("src/main/resources/asset/hls/$user")
         } else {
-            FileSystemResource("src/main/resources/asset/hls/$user/$user.m3u8")
+            FileSystemResource("src/main/resources/asset/hls/$user.m3u8")
         }
 }
