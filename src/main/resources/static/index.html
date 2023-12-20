@@ -9,7 +9,7 @@
   <video id="video-player" poster="https://pbs.twimg.com/profile_images/1701878932176351232/AlNU3WTK_400x400.jpg" controls autoplay muted> </video>
     <script>
       var video = document.getElementById('video-player');
-      var videoSrc = 'http://localhost:8080/api/live/test';
+      var videoSrc = '/api/live/test';
 
       if (video.canPlayType('application/vnd.apple.mpegurl')) {
         video.src = videoSrc;
