@@ -14,7 +14,7 @@ class LiveApiController {
 
     @GetMapping("/{user}")
     fun getLive(@PathVariable user: String): Resource =
-        if (user.contains("ts")) {
+        if (user.endsWith(".ts")) {
             ClassPathResource("asset/hls/$user")
         } else {
             ClassPathResource("asset/hls/$user.m3u8")
