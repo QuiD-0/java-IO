@@ -1,6 +1,6 @@
 package com.quid.io.spring.stream.gateway.web
 
-import org.springframework.core.io.ClassPathResource
+import com.quid.io.spring.stream.usecase.ServeHls
 import org.springframework.core.io.Resource
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -10,13 +10,12 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/api/live")
-class LiveApiController {
+class LiveApiController(
+    private val serveHls: ServeHls,
+) {
 
     @GetMapping("/{user}")
     fun getLive(@PathVariable user: String): Resource =
-        if (user.endsWith(".ts")) {
-            ClassPathResource("asset/hls/$user")
-        } else {
-            ClassPathResource("asset/hls/$user.m3u8")
-        }
+        serveHls(user)
+
 }
