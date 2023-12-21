@@ -1,0 +1,27 @@
+GET http://localhost:8080/api/live/list
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-21T125549.200.json
+
+###
+
+GET http://localhost:8080/api/live/check/teste
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-21T125543.200.json
+
+###
+
+GET http://localhost:8080/api/live/check/test
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-21T125540.200.json
+
+###
+

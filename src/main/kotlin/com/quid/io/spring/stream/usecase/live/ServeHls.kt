@@ -1,4 +1,4 @@
-package com.quid.io.spring.stream.usecase
+package com.quid.io.spring.stream.usecase.live
 
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.core.io.FileSystemResource
