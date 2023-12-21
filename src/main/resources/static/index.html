@@ -6,20 +6,27 @@
   <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 </head>
 <body>
-  <video id="video-player" poster="https://pbs.twimg.com/profile_images/1701878932176351232/AlNU3WTK_400x400.jpg" controls autoplay muted> </video>
-    <script>
-      var video = document.getElementById('video-player');
-      var videoSrc = '/api/live/test';
+<input type="text" id="user-name">
+<button onclick="search()">search</button>
+<br>
+<br>
+<video id="video-player" poster="https://pbs.twimg.com/profile_images/1701878932176351232/AlNU3WTK_400x400.jpg" controls autoplay muted> </video>
+<script>
+  function search(){
+    var user = document.getElementById('user-name').value;
+    var video = document.getElementById('video-player');
+    var videoSrc = '/api/live/'+user;
 
-      if (video.canPlayType('application/vnd.apple.mpegurl')) {
-        video.src = videoSrc;
+    if (video.canPlayType('application/vnd.apple.mpegurl')) {
+      video.src = videoSrc;
 
-      } else if (Hls.isSupported()) {
-        var hls = new Hls();
-        hls.loadSource(videoSrc);
-        hls.attachMedia(video);
-      }
-      video.play();
-    </script>
+    } else if (Hls.isSupported()) {
+      var hls = new Hls();
+      hls.loadSource(videoSrc);
+      hls.attachMedia(video);
+    }
+    video.play();
+  }
+</script>
 </body>
 </html>
