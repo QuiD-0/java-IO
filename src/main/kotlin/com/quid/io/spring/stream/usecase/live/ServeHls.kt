@@ -1,38 +1,23 @@
 package com.quid.io.spring.stream.usecase.live
 
-import org.springframework.beans.factory.annotation.Value
+import com.quid.io.spring.stream.config.LiveInfoConfig.StreamInfo
 import org.springframework.core.io.FileSystemResource
 import org.springframework.core.io.Resource
 import org.springframework.stereotype.Service
-import java.io.File
 
 fun interface ServeHls {
     operator fun invoke(user: String): Resource
 
     @Service
     class HlsServeUseCase(
-        @Value("\${live.hls-path}")
-        private val streamPath: String,
-        @Value("\${user.home}")
-        private val home: String
+        private val streamInfo: StreamInfo,
     ) : ServeHls {
-        init {
-            checkDir("$home/$streamPath")
-        }
 
         override fun invoke(user: String): Resource =
             if (user.endsWith(".ts")) {
-                FileSystemResource("$home/$streamPath/$user")
+                FileSystemResource(streamInfo.toTsPath(user))
             } else {
-                FileSystemResource("$home/$streamPath/$user.m3u8")
+                FileSystemResource(streamInfo.toM3u8Path(user))
             }
-
-
-        private fun checkDir(streamPath: String) {
-            val dir = File(streamPath)
-            if (!dir.exists()) {
-                dir.mkdir()
-            }
-        }
     }
 }

@@ -1,6 +1,6 @@
 package com.quid.io.spring.stream.usecase.live
 
-import org.springframework.beans.factory.annotation.Value
+import com.quid.io.spring.stream.config.LiveInfoConfig.StreamInfo
 import org.springframework.stereotype.Service
 import java.io.File
 
@@ -9,12 +9,9 @@ fun interface CheckLive {
 
     @Service
     class CheckLiveUseCase(
-        @Value("\${live.hls-path}")
-        private val streamPath: String,
-        @Value("\${user.home}")
-        private val home: String
+        private val streamInfo: StreamInfo,
     ) : CheckLive {
         override fun invoke(user: String): Boolean =
-            File("$home/$streamPath/$user.m3u8").exists()
+            File(streamInfo.toM3u8Path(user)).exists()
     }
 }

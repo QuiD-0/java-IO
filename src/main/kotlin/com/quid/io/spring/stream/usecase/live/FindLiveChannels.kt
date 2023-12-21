@@ -1,6 +1,6 @@
 package com.quid.io.spring.stream.usecase.live
 
-import org.springframework.beans.factory.annotation.Value
+import com.quid.io.spring.stream.config.LiveInfoConfig.StreamInfo
 import org.springframework.stereotype.Service
 import java.io.File
 
@@ -9,12 +9,9 @@ fun interface FindLiveChannels {
 
     @Service
     class FindLiveChannelsUseCase(
-        @Value("\${live.hls-path}")
-        private val streamPath: String,
-        @Value("\${user.home}")
-        private val home: String
+        private val streamInfo: StreamInfo,
     ) : FindLiveChannels {
-        override fun invoke(): List<String> = File("$home/$streamPath").listFiles()
+        override fun invoke(): List<String> = File(streamInfo.toStreamPath()).listFiles()
             ?.filter { it.name.endsWith(".m3u8") }
             ?.map { it.name.removeSuffix(".m3u8") }
             ?: emptyList()
