@@ -15,6 +15,6 @@ fun interface CheckLive {
         private val home: String
     ) : CheckLive {
         override fun invoke(user: String): Boolean =
-            "$home/$streamPath/$user.m3u8".let{ File(it).exists() }
+            File("$home/$streamPath/$user.m3u8").exists()
     }
 }
