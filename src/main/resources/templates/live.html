@@ -4,24 +4,41 @@
   <meta charset="UTF-8">
   <title>Title</title>
   <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
 </head>
 <body>
 <video id="video-player"
        poster="https://pbs.twimg.com/profile_images/1701878932176351232/AlNU3WTK_400x400.jpg"
        controls autoplay muted></video>
 <script>
-  var video = document.getElementById('video-player');
-  var videoSrc = '/api/live/[[${user}]]';
+  axios.get('/api/live/check/[[${user}]]')
+  .then(function (response) {
+    if (response.data === true) {
+      play();
+    } else {
+      alert("오프라인입니다.");
+    }
+  })
+  .catch(function () {
+    alert("에러입니다.");
+  });
 
-  if (video.canPlayType('application/vnd.apple.mpegurl')) {
-    video.src = videoSrc;
+  function play() {
+    var video = document.getElementById('video-player');
+    var videoSrc = '/api/live/[[${user}]]';
 
-  } else if (Hls.isSupported()) {
-    var hls = new Hls();
-    hls.loadSource(videoSrc);
-    hls.attachMedia(video);
+    if (video.canPlayType('application/vnd.apple.mpegurl')) {
+      video.src = videoSrc;
+
+    } else if (Hls.isSupported()) {
+      var hls = new Hls();
+      hls.loadSource(videoSrc);
+      hls.attachMedia(video);
+    }
+    video.play();
   }
-  video.play();
+
 </script>
 </body>
 </html>
