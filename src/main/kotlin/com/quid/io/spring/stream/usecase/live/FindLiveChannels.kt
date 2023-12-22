@@ -11,7 +11,7 @@ fun interface FindLiveChannels {
     class FindLiveChannelsUseCase(
         private val streamInfo: StreamInfo,
     ) : FindLiveChannels {
-        override fun invoke(): List<String> = File(streamInfo.filePath).listFiles()
+        override fun invoke(): List<String> = File(streamInfo.path).listFiles()
             ?.filter { it.name.endsWith(".m3u8") }
             ?.map { it.name.removeSuffix(".m3u8") }
             ?: emptyList()

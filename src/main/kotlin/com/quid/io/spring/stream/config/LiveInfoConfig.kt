@@ -19,9 +19,6 @@ class LiveInfoConfig {
     class StreamInfo(
         val path: String,
     ){
-        val filePath: String
-            get() = "file://$path"
-
 
         private val log = LoggerFactory.getLogger(this::class.java)
 
