@@ -1,7 +1,7 @@
-package com.quid.io.spring.stream.gateway.web
+package com.quid.io.spring.hlsliveStream.gateway.web
 
-import com.quid.io.spring.stream.usecase.live.FindLiveChannels
-import com.quid.io.spring.stream.usecase.live.ServeHls
+import com.quid.io.spring.hlsliveStream.usecase.FindLiveChannels
+import com.quid.io.spring.hlsliveStream.usecase.ServeHls
 import org.springframework.core.io.Resource
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable

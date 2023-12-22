@@ -1,4 +1,4 @@
-package com.quid.io.spring.stream.gateway.web
+package com.quid.io.spring.hlsliveStream.gateway.web
 
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Controller

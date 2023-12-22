@@ -1,14 +1,12 @@
-package com.quid.io.spring.stream.usecase
+package com.quid.io.spring.video.usecase
 
-import com.quid.io.spring.stream.gateway.repository.VideoPathRepository
-import org.springframework.core.io.FileSystemResource
+import com.quid.io.spring.video.gateway.repository.VideoPathRepository
 import org.springframework.core.io.Resource
 import org.springframework.core.io.ResourceLoader
 import org.springframework.core.io.support.ResourceRegion
 import org.springframework.http.HttpRange
 import org.springframework.stereotype.Service
 import reactor.core.publisher.Mono
-import kotlin.math.min
 
 fun interface GetFluxResource {
     operator fun invoke(id: String, range: HttpRange?): Mono<ResourceRegion>

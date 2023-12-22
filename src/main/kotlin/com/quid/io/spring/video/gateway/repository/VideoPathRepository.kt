@@ -1,4 +1,4 @@
-package com.quid.io.spring.stream.gateway.repository
+package com.quid.io.spring.video.gateway.repository
 
 import org.springframework.stereotype.Repository
 

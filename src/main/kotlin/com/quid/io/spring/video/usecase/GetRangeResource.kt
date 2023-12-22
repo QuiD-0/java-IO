@@ -1,11 +1,10 @@
-package com.quid.io.spring.stream.usecase
+package com.quid.io.spring.video.usecase
 
-import com.quid.io.spring.stream.gateway.repository.VideoPathRepository
+import com.quid.io.spring.video.gateway.repository.VideoPathRepository
 import org.springframework.core.io.FileSystemResource
 import org.springframework.core.io.support.ResourceRegion
 import org.springframework.http.HttpRange
 import org.springframework.stereotype.Service
-import kotlin.math.min
 
 fun interface GetRangeResource {
     operator fun invoke(id: String, range: HttpRange?): ResourceRegion
