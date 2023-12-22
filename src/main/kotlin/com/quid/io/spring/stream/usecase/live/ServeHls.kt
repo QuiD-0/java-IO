@@ -18,6 +18,7 @@ fun interface ServeHls {
 
         override fun invoke(user: String): Resource =
             if (user.endsWith(".ts")) {
+                log.info("Serving HLS for user: $user")
                 FileSystemResource(streamInfo.toTsPath(user))
             } else {
                 log.info("Serving HLS for user: $user")

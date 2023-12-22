@@ -10,9 +10,9 @@
 <body>
 <video id="video-player"
        poster="https://pbs.twimg.com/profile_images/1701878932176351232/AlNU3WTK_400x400.jpg"
-       autoplay muted></video>
+       controls></video>
 <script>
-  axios.get('/api/live/check/[[${user}]]')
+  axios.get('/api/live/check/[[${user}]].m3u8')
   .then(function (response) {
     if (response.data === true) {
       play();
