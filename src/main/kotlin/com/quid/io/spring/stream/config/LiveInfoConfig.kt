@@ -1,5 +1,6 @@
 package com.quid.io.spring.stream.config
 
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -18,6 +19,8 @@ class LiveInfoConfig {
     class StreamInfo(
         val path: String,
     ){
+        private val log = LoggerFactory.getLogger(this::class.java)
+
         init {
             checkDir(path)
         }
@@ -27,6 +30,7 @@ class LiveInfoConfig {
 
         private fun checkDir(streamPath: String) {
             val dir = File(streamPath)
+                .also { log.info("Checking stream path: $it") }
             if (!dir.exists()) {
                 dir.mkdir()
             }
