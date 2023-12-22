@@ -1,6 +1,5 @@
 package com.quid.io.spring.stream.gateway.web
 
-import com.quid.io.spring.stream.usecase.live.CheckLive
 import com.quid.io.spring.stream.usecase.live.FindLiveChannels
 import com.quid.io.spring.stream.usecase.live.ServeHls
 import org.springframework.core.io.Resource
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/api/live")
 class LiveApiController(
     private val serveHls: ServeHls,
-    private val checkLive: CheckLive,
     private val channels: FindLiveChannels
 ) {
 
@@ -24,7 +22,7 @@ class LiveApiController(
 
     @GetMapping("/check/{user}")
     fun checkLiveChannel(@PathVariable user: String): Boolean =
-        checkLive(user)
+        channels().contains(user)
 
     @GetMapping("/list")
     fun listLiveChannels(): List<String> = channels()
