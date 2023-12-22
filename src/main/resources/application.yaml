@@ -9,6 +9,7 @@ spring:
 server:
   max-http-header-size : 10000000
 
+#logging level
 logging:
   level:
-    trace: true
+    root: trace
