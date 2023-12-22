@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory
 import org.springframework.core.io.FileSystemResource
 import org.springframework.core.io.Resource
 import org.springframework.stereotype.Service
+import java.io.File
 
 fun interface ServeHls {
     operator fun invoke(user: String): Resource
@@ -20,7 +21,8 @@ fun interface ServeHls {
                 FileSystemResource(streamInfo.toTsPath(user))
             } else {
                 log.info("Serving HLS for user: $user")
-                FileSystemResource(streamInfo.toM3u8Path(user))
+                File(streamInfo.toTsPath(user))
+                    .run { FileSystemResource(this.absoluteFile) }
             }
     }
 }

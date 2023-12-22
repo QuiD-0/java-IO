@@ -26,8 +26,8 @@ class LiveInfoConfig {
             checkDir(path)
         }
 
-        fun toTsPath(user: String): String = "file://$path/$user"
-        fun toM3u8Path(user: String): String = "file://$path/$user.m3u8"
+        fun toTsPath(user: String): String = "$path/$user"
+        fun toM3u8Path(user: String): String = "$path/$user.m3u8"
 
         private fun checkDir(streamPath: String) {
             val dir = File(streamPath)
