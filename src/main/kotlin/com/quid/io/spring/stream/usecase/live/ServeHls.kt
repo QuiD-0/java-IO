@@ -21,7 +21,7 @@ fun interface ServeHls {
                 FileSystemResource(streamInfo.toTsPath(user))
             } else {
                 log.info("Serving HLS for user: $user")
-                File(streamInfo.toTsPath(user))
+                File(streamInfo.toM3u8Path(user))
                     .run { FileSystemResource(this.absoluteFile) }
             }
     }
