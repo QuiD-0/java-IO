@@ -10,7 +10,7 @@
 <body>
 <video id="video-player"
        poster="https://pbs.twimg.com/profile_images/1701878932176351232/AlNU3WTK_400x400.jpg"
-       controls></video>
+       playsinline autoplay muted></video>
 <script>
   axios.get('/api/live/check/[[${user}]]')
   .then(function (response) {
