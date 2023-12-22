@@ -11,24 +11,19 @@ class LiveInfoConfig {
     @Value("\${live.hls-path}")
     private lateinit var path: String
 
-    @Value("\${user.home}")
-    private lateinit var home: String
-
     @Bean
-    fun streamInfo(): StreamInfo = StreamInfo(path, home)
+    fun streamInfo(): StreamInfo = StreamInfo(path)
 
 
     class StreamInfo(
         val path: String,
-        val home: String,
     ){
         init {
-            checkDir("$home/$path")
+            checkDir(path)
         }
 
-        fun toStreamPath(): String = "$home/$path"
-        fun toTsPath(user: String): String = "$home/$path/$user"
-        fun toM3u8Path(user: String): String = "$home/$path/$user.m3u8"
+        fun toTsPath(user: String): String = "$path/$user"
+        fun toM3u8Path(user: String): String = "$path/$user.m3u8"
 
         private fun checkDir(streamPath: String) {
             val dir = File(streamPath)
