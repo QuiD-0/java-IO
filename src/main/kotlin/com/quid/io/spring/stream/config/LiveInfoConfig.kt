@@ -19,14 +19,18 @@ class LiveInfoConfig {
     class StreamInfo(
         val path: String,
     ){
+        val filePath: String
+            get() = "file://$path"
+
+
         private val log = LoggerFactory.getLogger(this::class.java)
 
         init {
             checkDir(path)
         }
 
-        fun toTsPath(user: String): String = "$path/$user"
-        fun toM3u8Path(user: String): String = "$path/$user.m3u8"
+        fun toTsPath(user: String): String = "file://$path/$user"
+        fun toM3u8Path(user: String): String = " file://$path/$user.m3u8"
 
         private fun checkDir(streamPath: String) {
             val dir = File(streamPath)
