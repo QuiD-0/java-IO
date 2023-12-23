@@ -1,7 +1,7 @@
-package com.quid.io.spring.video.gateway.web
+package com.quid.io.spring.media.gateway.web
 
-import com.quid.io.spring.video.usecase.GetFluxResource
-import com.quid.io.spring.video.usecase.GetRangeResource
+import com.quid.io.spring.media.usecase.GetFluxResource
+import com.quid.io.spring.media.usecase.GetRangeResource
 import org.springframework.core.io.support.ResourceRegion
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus

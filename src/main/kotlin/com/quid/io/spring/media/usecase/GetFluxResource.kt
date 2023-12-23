@@ -1,6 +1,6 @@
-package com.quid.io.spring.video.usecase
+package com.quid.io.spring.media.usecase
 
-import com.quid.io.spring.video.gateway.repository.VideoPathRepository
+import com.quid.io.spring.media.gateway.repository.VideoPathRepository
 import org.springframework.core.io.Resource
 import org.springframework.core.io.ResourceLoader
 import org.springframework.core.io.support.ResourceRegion
