@@ -15,7 +15,8 @@ fun interface ServeHls {
 
         override fun invoke(user: String): Resource =
             if (user.endsWith(".ts")) {
-                FileSystemResource(streamInfo.toTsPath(user))
+                val (username, tsSeq) = user.split("-")
+                FileSystemResource(streamInfo.toTsPath(username, tsSeq))
             } else {
                 FileSystemResource(streamInfo.toM3u8Path(user))
             }
