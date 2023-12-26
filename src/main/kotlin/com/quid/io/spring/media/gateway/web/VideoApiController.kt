@@ -19,7 +19,7 @@ class VideoApiController(
     @ResponseStatus(HttpStatus.PARTIAL_CONTENT)
     @GetMapping("{id}", produces = [MediaType.APPLICATION_OCTET_STREAM_VALUE])
     fun getVideo(@RequestHeader headers: HttpHeaders, @PathVariable id: String): ResourceRegion =
-        rangeResource(id, headers.range.firstOrNull())
+        rangeResource.video(id, headers.range.firstOrNull())
 
     @GetMapping("/flux/{id}", produces = [MediaType.APPLICATION_OCTET_STREAM_VALUE])
     fun getVideos(@RequestHeader headers: HttpHeaders, @PathVariable id: String): Mono<ResourceRegion> =

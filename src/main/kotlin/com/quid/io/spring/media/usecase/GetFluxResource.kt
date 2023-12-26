@@ -1,6 +1,6 @@
 package com.quid.io.spring.media.usecase
 
-import com.quid.io.spring.media.gateway.repository.VideoPathRepository
+import com.quid.io.spring.media.gateway.repository.PathRepository
 import org.springframework.core.io.Resource
 import org.springframework.core.io.ResourceLoader
 import org.springframework.core.io.support.ResourceRegion
@@ -14,11 +14,11 @@ fun interface GetFluxResource {
     @Service
     class GetFluxResourceImpl(
         private val resourceLoader: ResourceLoader,
-        private val videoPathRepository: VideoPathRepository
+        private val pathRepository: PathRepository
     ) : GetFluxResource {
 
         override fun invoke(id: String, range: HttpRange?): Mono<ResourceRegion> =
-            videoPathRepository.byId(id)
+            pathRepository.byVideoId(id)
                 .run { resourceLoader.getResource("file:$this") }
                 .let { ResourceRegion(it,  getRange(it, range), CHUNK_SIZE)}
                 .let { Mono.fromSupplier { it } }
