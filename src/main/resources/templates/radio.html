@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://kit.fontawesome.com/3dd68b6bf5.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/css/live.css">
+</head>
+<body>
+
+<div class="player">
+  <div class="player-track-meta">
+    <p>[[${user}]]</p>
+    <p><span>Is On Air</span></p>
+  </div>
+  <div class="player-controls">
+    <button class="player-play-btn"
+            role="button"
+            aria-label="Play"
+            data-playing="false"
+    >
+      <div class="player-icon-play">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><title>play</title><polygon class="icon-play" points="19.05 12 6 3.36 6 20.64 19.05 12"/><rect class="icon-container" width="24" height="24"/></svg>
+      </div>
+
+      <div class="player-icon-pause hidden">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><title>pause</title><g><rect  class="icon-pause" x="6" y="3.26" width="4" height="17.48"/><rect class="icon-pause" x="14" y="3.26" width="4" height="17.48"/></g><rect class="icon-container" width="24" height="24"/></svg>
+      </div>
+    </button>
+    <div class="player-timeline">
+      <span class="player-time player-time-current"></span>
+      <span class="player-time player-time-duration"></span>
+    </div>
+    <div class="player-volume-container">
+      <input type="range" id="volume" min="0" max="1" value="1" step="0.01" class="player-volume" />
+    </div>
+  </div>
+
+  <audio id="audio-player"></audio>
+</div>
+
+<script>
+  axios.get('/api/live/check/[[${user}]]')
+  .then(function (response) {
+    if (response.data === true) {
+      play();
+    } else {
+      alert("오프라인입니다.");
+    }
+  })
+  .catch(function () {
+    alert("에러입니다.");
+  });
+
+  function play() {
+    var audio = document.getElementById('audio-player');
+    var audioSrc = '/api/live/[[${user}]]';
+    audio.volume = 0.5;
+
+    if (audio.canPlayType('application/vnd.apple.mpegurl')) {
+      audio.src = audioSrc;
+
+    } else if (Hls.isSupported()) {
+      var hls = new Hls();
+      hls.loadSource(audioSrc);
+      hls.attachMedia(audio);
+    }
+    audio.play();
+  }
+
+  function pause() {
+    var audio = document.getElementById('audio-player');
+    audio.pause();
+  }
+
+  const audioElement = document.querySelector("audio");
+  const audioCtx = new AudioContext();
+
+  // Player controls and attributes
+  const playButton = document.querySelector(".player-play-btn");
+  const playIcon = playButton.querySelector(".player-icon-play");
+  const pauseIcon = playButton.querySelector(".player-icon-pause");
+  const volumeControl = document.querySelector(".player-volume")
+
+  window.addEventListener("load", () => {
+
+    playButton.addEventListener("click", () => {
+      if (playButton.dataset.playing === "false") {
+        play();
+
+        playButton.dataset.playing = "true";
+        playIcon.classList.add("hidden");
+        pauseIcon.classList.remove("hidden");
+      } else if (playButton.dataset.playing === "true") {
+        pause();
+        playButton.dataset.playing = "false";
+        pauseIcon.classList.add("hidden");
+        playIcon.classList.remove("hidden");
+      }
+    });
+
+    audioElement.addEventListener("ended", () => {
+      playButton.dataset.playing = "false";
+      pauseIcon.classList.add("hidden");
+      playIcon.classList.remove("hidden");
+      audioElement.currentTime = 0;
+    });
+
+    const gainNode = audioCtx.createGain();
+    const volumeControl = document.querySelector(".player-volume");
+    volumeControl.addEventListener("change", () => {
+      gainNode.gain.value = volumeControl.value;
+    });
+
+  }, false);
+</script>
+</body>
+</html>

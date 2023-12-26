@@ -12,8 +12,8 @@
 <video id="video-player"
        poster="https://afreehp.kr/update/bnr/bnr_penalty_type_1.png"
        playsinline autoplay muted controls
-       controlsList="noplaybackrate nodownload"></video><script>
-
+       controlsList="noplaybackrate nodownload"></video>
+<script>
   axios.get('/api/live/check/[[${user}]]')
   .then(function (response) {
     if (response.data === true) {
