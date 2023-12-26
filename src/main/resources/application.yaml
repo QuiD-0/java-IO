@@ -1,5 +1,6 @@
 live:
   hls-path: /home/ubuntu/hls
+  radio-path: /home/ubuntu/radio
 
 spring:
   servlet:
