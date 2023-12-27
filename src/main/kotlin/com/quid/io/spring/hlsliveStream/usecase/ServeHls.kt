@@ -5,19 +5,24 @@ import org.springframework.core.io.FileSystemResource
 import org.springframework.core.io.Resource
 import org.springframework.stereotype.Service
 
-fun interface ServeHls {
-    operator fun invoke(user: String): Resource
+interface ServeHls {
+    fun live(user: String): Resource
+    fun radio(user: String): Resource
+    fun getHlsResourceFromPath(user: String, hlsPath: String): Resource =
+        if (user.endsWith(".ts")) {
+            FileSystemResource("$hlsPath/$user")
+        } else {
+            FileSystemResource("$hlsPath/$user.m3u8")
+        }
 
     @Service
     class HlsServeUseCase(
         private val streamInfo: StreamInfo,
     ) : ServeHls {
 
-        override fun invoke(user: String): Resource =
-            if (user.endsWith(".ts")) {
-                FileSystemResource(streamInfo.toTsPath(user))
-            } else {
-                FileSystemResource(streamInfo.toM3u8Path(user))
-            }
+        override fun live(user: String): Resource = getHlsResourceFromPath(user, streamInfo.path)
+
+        override fun radio(user: String): Resource = getHlsResourceFromPath(user, streamInfo.radioPath)
+
     }
 }
