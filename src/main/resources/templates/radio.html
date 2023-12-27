@@ -13,7 +13,7 @@
 <div class="player">
   <div class="player-track-meta">
     <p>[[${user}]]</p>
-    <p><span>Is On Air</span></p>
+    <p><span id="isOnAir">Is On Air</span></p>
   </div>
   <div class="player-controls">
     <button class="player-play-btn"
@@ -46,6 +46,8 @@
     if (response.data === true) {
       play();
     } else {
+      let isOnAir = document.getElementById('isOnAir');
+      isOnAir.innerHTML = "Is Off Air";
       alert("오프라인입니다.");
     }
   })

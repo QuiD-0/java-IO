@@ -1,3 +1,7 @@
 video::-webkit-media-controls-current-time-display{ display: none !important; }
 video::-webkit-media-controls-time-remaining-display { display: none !important; }
 video::-webkit-media-controls-timeline { display: none !important; }
+
+video {
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+}
