@@ -1,4 +1,4 @@
-package com.quid.io.spring.hlsliveStream.config
+package com.quid.io.spring.hlsLiveStream.config
 
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Value

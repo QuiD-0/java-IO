@@ -1,6 +1,6 @@
-package com.quid.io.spring.hlsliveStream.usecase
+package com.quid.io.spring.hlsLiveStream.usecase
 
-import com.quid.io.spring.hlsliveStream.config.LiveInfoConfig.StreamInfo
+import com.quid.io.spring.hlsLiveStream.config.LiveInfoConfig.StreamInfo
 import org.springframework.stereotype.Service
 import java.io.File
 
