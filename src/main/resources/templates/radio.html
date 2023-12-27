@@ -11,6 +11,7 @@
 <body>
 
 <div class="player">
+  <audio id="audio-player" src=""></audio>
   <div class="player-track-meta">
     <p>[[${user}]]</p>
     <p><span id="isOnAir">Is On Air</span></p>
@@ -36,8 +37,6 @@
       <input type="range" id="volume" min="0" max="1" value="1" step="0.01" class="player-volume" />
     </div>
   </div>
-
-  <audio id="audio-player"></audio>
 </div>
 
 <script>
