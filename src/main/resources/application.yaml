@@ -7,5 +7,13 @@ spring:
     multipart:
       max-file-size: 100MB
       max-request-size: 100MB
+  data:
+    mongodb:
+      database: chat
+      host: localhost
+      port: 27017
+      username: root
+      password: root
+
 server:
   max-http-request-header-size: 10000000

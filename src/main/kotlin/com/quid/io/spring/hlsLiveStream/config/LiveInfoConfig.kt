@@ -29,15 +29,8 @@ class LiveInfoConfig {
             checkDir(path)
         }
 
-        fun toTsPath(user: String): String = "$path/$user"
-        fun toM3u8Path(user: String): String = "$path/$user.m3u8"
-
-        fun toRadioTsPath(user: String): String = "$radioPath/$user"
-        fun toRadioM3u8Path(user: String): String = "$radioPath/$user.m3u8"
-
         private fun checkDir(streamPath: String) {
             val dir = File(streamPath)
-                .also { log.info("Checking stream path: $it") }
             if (!dir.exists()) {
                 dir.mkdir()
             }
