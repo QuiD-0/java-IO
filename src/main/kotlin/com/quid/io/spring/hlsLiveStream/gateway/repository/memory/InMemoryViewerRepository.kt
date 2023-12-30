@@ -1,17 +1,17 @@
-package com.quid.io.spring.hlsLiveStream.gateway.repository.cache
+package com.quid.io.spring.hlsLiveStream.gateway.repository.memory
 
 import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Component
 import java.time.LocalDateTime
 import java.util.concurrent.ConcurrentHashMap
 
-interface CacheViewerRepository {
+interface InMemoryViewerRepository {
 
     fun add(user: String, viewer: String)
     fun list(user: String): List<String>
 
     @Component
-    class CacheViewerRepositoryImpl : CacheViewerRepository {
+    class InMemoryViewerRepositoryImpl : InMemoryViewerRepository {
 
         private val map: MutableMap<String, MutableSet<Viewer>> = ConcurrentHashMap()
 

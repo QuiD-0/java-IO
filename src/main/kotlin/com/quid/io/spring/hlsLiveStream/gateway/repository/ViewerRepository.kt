@@ -1,6 +1,6 @@
 package com.quid.io.spring.hlsLiveStream.gateway.repository
 
-import com.quid.io.spring.hlsLiveStream.gateway.repository.cache.CacheViewerRepository
+import com.quid.io.spring.hlsLiveStream.gateway.repository.memory.InMemoryViewerRepository
 import org.springframework.stereotype.Repository
 
 interface ViewerRepository {
@@ -9,14 +9,14 @@ interface ViewerRepository {
 
     @Repository
     class ViewerRepositoryImpl(
-        private val cacheViewerRepository: CacheViewerRepository
+        private val inMemoryViewerRepository: InMemoryViewerRepository
     ) : ViewerRepository {
         override fun add(user: String, viewer: String) {
-            cacheViewerRepository.add(user, viewer)
+            inMemoryViewerRepository.add(user, viewer)
         }
 
         override fun list(user: String): List<String> {
-            return cacheViewerRepository.list(user)
+            return inMemoryViewerRepository.list(user)
         }
     }
 
