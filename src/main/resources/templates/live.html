@@ -14,6 +14,9 @@
        poster="https://afreehp.kr/update/bnr/bnr_penalty_type_1.png"
        playsinline="" autoplay muted controls x-webkit-airplay="" webkit-playsinline=""
        controlsList="noplaybackrate nodownload" width="1327px"></video>
+<div>
+    <span id="viewer-count">0</span><span>명 시청중</span>
+</div>
 <script>
     axios.get('/api/live/check/[[${user}]]')
         .then(function (response) {
@@ -41,6 +44,16 @@
         }
         video.play();
     }
+
+    setInterval(function () {
+        axios.get('/api/live/list/[[${user}]]/count')
+            .then(function (response) {
+                document.getElementById('viewer-count').innerText = response.data;
+            })
+            .catch(function () {
+                alert("에러입니다.");
+            });
+    }, 1000);
 
 </script>
 </body>

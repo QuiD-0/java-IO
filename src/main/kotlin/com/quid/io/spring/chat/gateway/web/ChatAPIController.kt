@@ -1,4 +1,4 @@
-package com.quid.io.spring.chat.gateway.http
+package com.quid.io.spring.chat.gateway.web
 
 import com.quid.io.spring.chat.usecase.SendChatUseCase
 import com.quid.io.spring.chat.domain.Chat
