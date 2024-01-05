@@ -12,18 +12,13 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 class WebSocketConfig : WebSocketMessageBrokerConfigurer {
 
     override fun registerStompEndpoints(registry: StompEndpointRegistry) {
-        registry.addEndpoint("/chat")
+        registry.addEndpoint("/ws/chat")
             .setAllowedOrigins("*")
     }
 
     override fun configureMessageBroker(registry: MessageBrokerRegistry) {
         registry.setApplicationDestinationPrefixes("/pub")
-            .enableSimpleBroker(
-                "/queue",
-                "/topic"
-            )
-
-        registry.enableSimpleBroker("/sub")
+            .enableSimpleBroker("/sub")
     }
 
 }

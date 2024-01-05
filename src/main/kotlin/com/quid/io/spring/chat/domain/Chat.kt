@@ -4,7 +4,7 @@ import org.springframework.format.annotation.DateTimeFormat
 import java.time.LocalDateTime
 import java.util.*
 
-class Chat(
+data class Chat(
     val id: UUID = UUID.randomUUID(),
     val chatRoomId: UUID,
     val nickname: String,

@@ -1,20 +1,21 @@
 package com.quid.io.spring.chat
 
-import org.springframework.messaging.simp.SimpMessageSendingOperations
+import com.quid.io.spring.chat.domain.Chat
+import org.springframework.messaging.simp.SimpMessagingTemplate
 import org.springframework.stereotype.Service
 
 interface SendChatUseCase {
 
-    operator fun invoke()
+    operator fun invoke(chat: Chat)
 
 
     @Service
     class StompSendChatUseCase(
-        private val message: SimpMessageSendingOperations
+        private val template: SimpMessagingTemplate
     ) : SendChatUseCase {
 
-        override fun invoke() {
-            message.convertAndSend("/pub/topic/chat", "hello")
+        override fun invoke(chat: Chat) {
+            template.convertAndSend("/sub/chat/"+chat.chatRoomId, chat)
         }
     }
 }
